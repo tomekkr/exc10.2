@@ -10,7 +10,17 @@ class BankAccount {
         this.balance = balance;
     }
 
+    public double getBalance() {
+        return balance;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
     public void deposit(double amount) {
+        if (amount < 0)
+            throw new IllegalArgumentException("Kwota wpłaty nie może być mniejsza niż 0");
         balance += amount;
     }
 
@@ -20,6 +30,8 @@ class BankAccount {
                     "Brak wystarczających środków na koncie (aktualne saldo: " + balance + ")");
         if (amount > WITHDRAW_LIMIT)
             throw new WithdrawLimitExceededException(WITHDRAW_LIMIT);
+        if (amount < 0)
+            throw new IllegalArgumentException("nie może być mniejsza niż 0");
         balance -= amount;
     }
 
