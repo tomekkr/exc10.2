@@ -1,6 +1,7 @@
 class BankAccount {
     private Person person;
     private double balance;
+    private static final double WITHDRAW_LIMIT = 1000;
 
     public BankAccount(Person person, double balance) {
         if (person == null)
@@ -13,10 +14,12 @@ class BankAccount {
         balance += amount;
     }
 
-    public void withdraw(double amount) {
+    public void withdraw(double amount) throws WithdrawGreaterThanCurrentBalanceException, WithdrawLimitExceededException {
         if (balance - amount < 0)
-            throw new IllegalArgumentException("Nie można wypłacić żadanej kwoty (" + amount + "). " +
+            throw new WithdrawGreaterThanCurrentBalanceException("Nie można wypłacić żadanej kwoty (" + amount + "). " +
                     "Brak wystarczających środków na koncie (aktualne saldo: " + balance + ")");
+        if (amount > WITHDRAW_LIMIT)
+            throw new WithdrawLimitExceededException(WITHDRAW_LIMIT);
         balance -= amount;
     }
 
