@@ -5,7 +5,7 @@ class BankAccount {
 
     public BankAccount(Person person, double balance) {
         if (person == null)
-            throw new NullPointerException("Pole person nie może być puste");
+            throw new IllegalArgumentException("Pole person nie może być puste");
         this.person = person;
         this.balance = balance;
     }
@@ -24,7 +24,7 @@ class BankAccount {
         balance += amount;
     }
 
-    public void withdraw(double amount) throws WithdrawGreaterThanCurrentBalanceException, WithdrawLimitExceededException {
+    public void withdraw(double amount) {
         if (balance - amount < 0)
             throw new WithdrawGreaterThanCurrentBalanceException("Nie można wypłacić żadanej kwoty (" + amount + "). " +
                     "Brak wystarczających środków na koncie (aktualne saldo: " + balance + ")");

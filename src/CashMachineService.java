@@ -6,7 +6,7 @@ class CashMachineService {
     private static final int DEPOSIT = 2;
     private static final int SHOW_CURRENT_ACCOUNT_BALANCE = 3;
 
-    void cashMachineMenu(BankAccount bankAccount) throws WithdrawGreaterThanCurrentBalanceException, WithdrawLimitExceededException {
+    void cashMachineMenu(BankAccount bankAccount) {
         int option;
         Scanner scanner = new Scanner(System.in);
 
